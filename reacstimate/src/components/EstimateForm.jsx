@@ -7,12 +7,26 @@ class EstimateForm extends Component {
         customerFirstName: '',
         customerLastName: '',
         items: {}
-        // items: {
-        //     1: {quantity: 1, descriptions: 'UC centrale'},
-        //     2: {quantity: 2, descriptions: 'écrans'},
-        //     3: {quantity: 1, descriptions: 'aze'},
-        // }
      };
+
+     /*
+     Items: {
+        "12345": {
+            id: "34567",
+            description: "Unité centrale",
+            quantity: "1",
+            taxe: 0.2,
+            amount: 1400
+        },
+        "12345": {
+            id: "34567",
+            description: "Ecran",
+            quantity: "2",
+            taxe: 0.2,
+            amount: 350
+        }
+     }
+     */
 
     handleSubmit = evt => {
         evt.preventDefault();
@@ -28,6 +42,20 @@ class EstimateForm extends Component {
         });
     }
 
+    addItem = () => {
+        const id = Date.now().toString();
+        const items = {...this.state.items};
+        console.log(this, items);
+        items[id] = {
+            id: id,
+            description: "description",
+            quantity: "1",
+            taxe: 0.2,
+            amount: 0
+        };
+        this.setState({ items });
+    }
+
     render() { 
         return (
             <React.Fragment>
@@ -37,7 +65,8 @@ class EstimateForm extends Component {
             <input type="text" name="title" id='title' placeholder='titre du devis' value={this.state.title} onChange={evt => this.handleChange(evt, 'title')} /> <br/>
             <input type="text" name="customerFirstName" id='customerFirstName' placeholder='prénom' value={this.state.customerFirstName} onChange={evt => this.handleChange(evt, 'customerFirstName')} /> <br/>
             <input type="text" name="customerLastName" id='customerLastName' placeholder='nom' value={this.state.customerLastName} onChange={evt => this.handleChange(evt, 'customerLastName')} /> <br/>
-                <button type='submit' >Générer le devis</button>
+            <button onClick={this.addItem}>Ajouter une ligne</button>
+            <button type='submit' >Générer le devis</button>
             </form>
             </React.Fragment>
         );

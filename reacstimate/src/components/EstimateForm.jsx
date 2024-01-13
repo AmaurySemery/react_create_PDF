@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Item from './item'
 
 class EstimateForm extends Component {
     state = { 
@@ -66,6 +67,9 @@ class EstimateForm extends Component {
             <input type="text" name="customerFirstName" id='customerFirstName' placeholder='prénom' value={this.state.customerFirstName} onChange={evt => this.handleChange(evt, 'customerFirstName')} /> <br/>
             <input type="text" name="customerLastName" id='customerLastName' placeholder='nom' value={this.state.customerLastName} onChange={evt => this.handleChange(evt, 'customerLastName')} /> <br/>
             <button onClick={this.addItem}>Ajouter une ligne</button>
+            {Object.keys(this.state.items).map((itemId, index) => (
+                <Item key={index} item={this.state.items[itemId]} />
+            ))}
             <button type='submit' >Générer le devis</button>
             </form>
             </React.Fragment>

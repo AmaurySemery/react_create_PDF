@@ -57,6 +57,10 @@ class EstimateForm extends Component {
         this.setState({ items });
     }
 
+    handleItemChange = (evt, item, field) => {
+        console.log(evt.currentTarget.value, item, field);
+    }
+
     render() { 
         return (
             <React.Fragment>
@@ -68,7 +72,7 @@ class EstimateForm extends Component {
             <input type="text" name="customerLastName" id='customerLastName' placeholder='nom' value={this.state.customerLastName} onChange={evt => this.handleChange(evt, 'customerLastName')} /> <br/>
             <button onClick={this.addItem}>Ajouter une ligne</button>
             {Object.keys(this.state.items).map((itemId, index) => (
-                <Item key={index} item={this.state.items[itemId]} />
+                <Item key={index} item={this.state.items[itemId]} onItemChange={this.handleItemChange} />
             ))}
             <button type='submit' >Générer le devis</button>
             </form>

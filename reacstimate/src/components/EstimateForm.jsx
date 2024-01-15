@@ -46,20 +46,28 @@ class EstimateForm extends Component {
     addItem = () => {
         const id = Date.now().toString();
         const items = {...this.state.items};
-        console.log(this, items);
+        console.log(this, this.state.items);
         items[id] = {
             id: id,
-            description: "description",
-            quantity: "1",
+            description: "",
+            quantity: "",
             taxe: 0.2,
             amount: 0
         };
         this.setState({ items });
+        console.log(this, this.state.items);
     }
 
     handleItemChange = (evt, item, field) => {
-        console.log(evt.currentTarget.value, item, field);
-    }
+        // console.log(evt.currentTarget.value, item, field);
+        const value = evt.currentTarget.value;
+        const clonedItem = {...item};
+        clonedItem[field] = value;
+        const clonedItems = {...this.state.items};
+        clonedItems[clonedItem.id] = clonedItem;
+        this.setState({ items: clonedItems });
+        
+      };
 
     render() { 
         return (

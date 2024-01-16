@@ -37,6 +37,8 @@ class EstimateForm extends Component {
     console.log(this, this.state.items);
   };
 
+  // test
+
   handleItemChange = (evt, item, field) => {
     console.log(evt.currentTarget.value, item, field);
     const value = evt.currentTarget.value;
